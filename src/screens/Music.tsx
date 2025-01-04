@@ -1,13 +1,13 @@
 import React from 'react';
 import SplitPanes from '../components/SplitPanes';
 
-const Sprites: React.FC = () => {
+const Music: React.FC = () => {
     return (
         <SplitPanes items={[
             <div>Sidebar A</div>,
             <SplitPanes orientation='vertical' items={[
-                <div>Sprites</div>,
-                <div>Frames</div>
+                <div>Music</div>,
+                <div>Patterns</div>
             ]} splits={[
                 { size: 400, minSize: 200, minimized: false, expandWithWindow: true },
                 { size: 200, minSize: 100, minimized: false, expandWithWindow: false }
@@ -21,4 +21,4 @@ const Sprites: React.FC = () => {
     );
 };
 
-export default Sprites;
+export default Music;

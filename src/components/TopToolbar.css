@@ -15,19 +15,23 @@
 .top-toolbar .search {
     position: relative;
     border-radius: 4px;
-    background-color: white;
     margin-left: 10px;
     width: auto;
     display: flex;
     align-items: center;
 }
 
-.top-toolbar .search .searchIcon {
-    padding: 0 10px;
+.top-toolbar .search .icon {
+    margin-right: -30px;
     pointer-events: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+}
+
+.top-toolbar .search .icon svg {
+    fill: white;
 }
 
 .top-toolbar .search .input {

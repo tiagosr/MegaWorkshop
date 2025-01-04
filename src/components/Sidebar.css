@@ -15,3 +15,46 @@
     font-size: 18px;
     text-align: left;
 }
+
+.sidebar-item-list .branch {
+    padding-left: 0;
+    cursor: pointer;
+    color: #fff;
+    fill: white;
+    stroke: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar-item-list .leaf {
+    padding-left: 20px;
+    cursor: pointer;
+    color: #fff;
+    fill: white;
+    stroke: white;
+    text-decoration: none;
+    display: block;
+}
+.sidebar-item-list .branch .icon {
+    color: white;
+    fill: white;
+    stroke: white;
+}
+
+.sidebar-item-list .branch:hover {
+    background-color: #000;
+}
+
+.sidebar-item-list .branch.active {
+    background-color: #000;
+}
+
+.sidebar-item-list .leaf .icon {
+    color: #fff;
+    fill: #fff;
+    stroke: #fff;
+}
+
+.sidebar-item-list .leaf:hover {
+    background-color: #000;
+}
