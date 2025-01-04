@@ -1,0 +1,47 @@
+
+.top-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3f51b5;
+    padding: 10px 20px;
+    color: white;
+}
+
+.top-toolbar .title {
+    flex-grow: 1;
+}
+
+.top-toolbar .search {
+    position: relative;
+    border-radius: 4px;
+    background-color: white;
+    margin-left: 10px;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.top-toolbar .search .searchIcon {
+    padding: 0 10px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-toolbar .search .input {
+    padding: 10px;
+    padding-left: 40px;
+    width: 200px;
+    border: none;
+    outline: none;
+}
+
+.top-toolbar .search .button {
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
