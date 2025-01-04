@@ -1,6 +1,6 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { LegacyRef, useCallback, useState } from 'react';
 import './SplitPanes.css';
-import useResizeObserver from '../helpers/useResizeObserver';
+import { useResizeObserver } from '../helpers/useResizeObserver';
 
 interface SplitPanesItemSplit {
     size: number;
@@ -32,6 +32,8 @@ const SplitPanes: React.FC<SplitPanesProps> = ({ items, orientation, splits }) =
         return newSizes;
     };
 
+    const realSizes = useCallback(() => sizes, [sizes]);
+
     const readjust = (sizes: SplitPanesItemSplit[], newSize: number) => {
         const newSizes = [...sizes];
         const expandableSizes = newSizes.filter(size => size.expandWithWindow);
@@ -43,9 +45,9 @@ const SplitPanes: React.FC<SplitPanesProps> = ({ items, orientation, splits }) =
     };
 
     const onResize = useCallback(orientation === "horizontal" ?(target: HTMLElement) => {
-        setSizes(readjust(sizes, target.clientWidth));
+        setSizes(readjust(realSizes(), target.clientWidth));
     } : (target: HTMLElement) => {
-        setSizes(readjust(sizes, target.clientHeight));
+        setSizes(readjust(realSizes(), target.clientHeight));
     }, [orientation]);
 
     const targetRef = useResizeObserver(onResize);
@@ -94,7 +96,7 @@ const SplitPanes: React.FC<SplitPanesProps> = ({ items, orientation, splits }) =
     };
 
     return (
-        <div ref={targetRef} className={`split-panes ${orientation}`}>
+        <div ref={targetRef as LegacyRef<HTMLDivElement>} className={`split-panes ${orientation}`}>
             {items.map((item, index) => (
                 <>
                     <div key={index} className="split-pane" style={orientation === 'horizontal' ? { width: sizes[index]?.size } : { height: sizes[index]?.size }}>

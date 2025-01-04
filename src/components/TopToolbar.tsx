@@ -4,7 +4,12 @@ import "./TopToolbar.css";
 const TopToolbar: React.FC = () => {
     return (
         <div className="top-toolbar">
-            <div className="title">Modes</div>
+            <select className="select"
+                defaultValue="Worlds">
+                <option className="option" value={"/"}>Worlds</option>
+                <option className="option" value={"/sprites"}>Sprites</option>
+            </select>
+            <div className="title"></div>
             <button className="button">Export</button>
             <button className="button">Play</button>
             <div className="search">

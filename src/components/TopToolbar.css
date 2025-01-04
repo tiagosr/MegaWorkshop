@@ -45,3 +45,13 @@
     color: white;
     cursor: pointer;
 }
+
+.top-toolbar .select {
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.top-toolbar .select .option {
+    padding: 10px;
+    cursor: pointer;
+}

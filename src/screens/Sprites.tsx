@@ -1,12 +1,12 @@
 import React from 'react';
 import SplitPanes from '../components/SplitPanes';
 
-const GameWorlds: React.FC = () => {
+const Sprites: React.FC = () => {
     return (
         <SplitPanes items={[
             <div>Sidebar A</div>,
             <SplitPanes orientation='vertical' items={[
-                <div>World</div>,
+                <div>Sprites</div>,
                 <div>Properties</div>
             ]} splits={[
                 { size: 400, minSize: 200, minimized: false, expandWithWindow: true },
@@ -21,4 +21,4 @@ const GameWorlds: React.FC = () => {
     );
 };
 
-export default GameWorlds;
+export default Sprites;

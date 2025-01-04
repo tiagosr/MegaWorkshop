@@ -3,6 +3,9 @@ import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
+import { registerRoute } from "../src/lib/electron-router-dom";
+
+
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -26,11 +29,19 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 
 
 let win: BrowserWindow | null
 
-function createWindow() {
+type Route = Parameters<typeof registerRoute>[0];
+interface WindowProps extends Electron.BrowserWindowConstructorOptions {
+  id: Route['id']
+  query?: Route['query']
+}
+
+function createWindow({id, query, ...options}: WindowProps) {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'md.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
+      nodeIntegration: true,
+      contextIsolation: false,
     },
   })
 
@@ -38,13 +49,23 @@ function createWindow() {
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
   })
-
+  /*
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL)
   } else {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, 'index.html'))
   }
+    */
+  registerRoute({
+    id,
+    query,
+    devServerUrl: VITE_DEV_SERVER_URL,
+    htmlFile: path.join(RENDERER_DIST, 'index.html'),
+    browserWindow: win,
+  });
+  
+  return win
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -61,8 +82,8 @@ app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
+    createWindow({id: 'main'})
   }
 })
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => createWindow({id:'main'}))
