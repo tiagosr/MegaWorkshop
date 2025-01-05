@@ -1,7 +1,13 @@
 import { createElectronRouter } from './electron-router'
+
+interface ImportMeta {
+  env?: {
+    VITE_DEV_SERVER_URL?: string;
+  };
+}
  
 export const { Router, registerRoute, settings } = createElectronRouter({
-  devServerUrl: process.env['VITE_DEV_SERVER_URL'],
+  devServerUrl: (import.meta as unknown as ImportMeta).env?.VITE_DEV_SERVER_URL,
   types: {
     /**
      * The ids of the windows of your application, think of these ids as the basenames of the routes

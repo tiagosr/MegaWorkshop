@@ -1,8 +1,10 @@
 {
   "name": "megaworkshop",
+  "productName": "MegaWorkshop",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "description": "Visual 16-bit game maker",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",

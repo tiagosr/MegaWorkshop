@@ -47462,7 +47462,7 @@ function createElectronRouter(options) {
   };
 }
 const { Router, registerRoute, settings } = createElectronRouter({
-  devServerUrl: process.env["VITE_DEV_SERVER_URL"],
+  devServerUrl: "http://localhost:5173/",
   types: {
     /**
      * The ids of the windows of your application, think of these ids as the basenames of the routes

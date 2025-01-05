@@ -7,6 +7,7 @@ interface SplitPanesItemSplit {
     minSize: number;
     minimized: boolean;
     expandWithWindow: boolean;
+    noOverflow?: boolean;
 }
 
 interface SplitPanesProps {
@@ -99,7 +100,9 @@ const SplitPanes: React.FC<SplitPanesProps> = ({ items, orientation, splits }) =
         <div ref={targetRef as LegacyRef<HTMLDivElement>} className={`split-panes ${orientation}`}>
             {items.map((item, index) => (
                 <>
-                    <div key={index} className="split-pane" style={orientation === 'horizontal' ? { width: sizes[index]?.size } : { height: sizes[index]?.size }}>
+                    <div key={index}
+                         className={sizes[index].noOverflow ?"split-pane-no-overflow":"split-pane"}
+                         style={orientation === 'horizontal' ? { width: sizes[index]?.size } : { height: sizes[index]?.size }}>
                         {item}
                     </div>
                     {index < items.length - 1 && <div 

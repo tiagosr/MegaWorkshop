@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
+import { TreeBranchOpenIcon, TreeBranchClosedIcon } from '../helpers/Icons';
 
 interface FileNode {
     name: string;
@@ -32,8 +33,10 @@ const SidebarItemList: React.FC<SidebarItemListProps> = ({ title, files }: Sideb
             <div className='item-list' key={node.name}>
                 {node.children && node.children.length > 0 ? (
                     <>
-                        <div className='branch' onClick={() => toggleNode(node.name)} style={{ cursor: 'pointer' }}>
-                            {expandedNodes.has(node.name) ? '▼' : '▶'} {node.icon ? <node.icon className="icon" /> : <></>} {node.name}
+                        <div className='branch' style={{ cursor: 'pointer' }}>
+                            {expandedNodes.has(node.name) ? 
+                                <TreeBranchOpenIcon  onClick={() => toggleNode(node.name)}/> :
+                                <TreeBranchClosedIcon  onClick={() => toggleNode(node.name)}/>} {node.icon ? <node.icon className="icon" /> : <></>} {node.name}
                         </div>
                         {expandedNodes.has(node.name) && renderTree(node.children)}
                     </>
@@ -46,7 +49,9 @@ const SidebarItemList: React.FC<SidebarItemListProps> = ({ title, files }: Sideb
 
     return <div className='sidebar-item-list'>
         <div className='sidebar-title'>{title}</div>
-        {renderTree(files)}
+        <div className='item-list-top'>
+            {renderTree(files)}
+        </div>
     </div>;
 };
 
