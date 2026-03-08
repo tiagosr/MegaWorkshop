@@ -1,15 +1,15 @@
 import { MapIcon } from "../helpers/Icons";
-import { Tilemap } from "./Tilemap";
+import { TilemapRef } from "./Tilemap";
 import { Resource, ResourceConstructorArgs, ResourceRef } from "./Resource";
 
 export interface MapConstructorArgs extends ResourceConstructorArgs {
-    background: Tilemap;
-    foreground: Tilemap;
+    background: TilemapRef;
+    foreground: TilemapRef;
 }
 
 export class Map extends Resource {
-    public background: Tilemap;
-    public foreground: Tilemap;
+    public background: TilemapRef;
+    public foreground: TilemapRef;
 
     constructor({name, id, path, background, foreground}: MapConstructorArgs) {
         super({name, id, path});

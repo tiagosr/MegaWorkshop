@@ -1,4 +1,4 @@
-import { QuestionIcon } from "../helpers/Icons";
+import { FolderIcon, QuestionIcon } from "../helpers/Icons";
 import { Project } from "./Project";
 
 export interface ResourceConstructorArgs {
@@ -22,7 +22,7 @@ export class Resource {
         return "Resource";
     }
 
-    public get icon(): React.FunctionComponent<any> {
+    public get icon(): React.FunctionComponent<React.SVGAttributes<SVGElement>> {
         return QuestionIcon;
     }
 }
@@ -42,3 +42,22 @@ export class ResourceRef<T extends Resource> {
     }
 
 }
+
+export class ResourceFolder<T extends Resource> extends Resource {
+
+    public items: Array<T | ResourceFolder<T>>;
+
+    constructor({ name, id, path }: ResourceConstructorArgs) {
+        super({name, id, path})
+        this.items = []
+    }
+
+    override get type(): string {
+        return "Folder";
+    }
+    override get icon(): React.FunctionComponent<React.SVGAttributes<SVGElement>> {
+        return FolderIcon;
+    }
+}
+
+export type ResourceFolderRef<T extends Resource> = ResourceRef<T>;
